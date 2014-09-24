@@ -12,7 +12,7 @@ FactoryGirl.define do
   
   factory :bid do
     auction FactoryGirl.build(:auction)
-    amount rand(100)
+    amount Random.rand(100)
     
     factory :high_bid do
       amount 105

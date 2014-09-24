@@ -10,4 +10,10 @@ RSpec.describe Auction, :type => :model do
       expect(build(:auction)).to be_valid
     end
   end
+  
+  describe "associations" do
+    it "responds to a call for its bids" do
+      expect(build(:auction)).to respond_to(:bids)
+    end
+  end
 end
