@@ -4,4 +4,8 @@ class Item < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  def sold?
+    self.owner ? true : false
+  end
 end

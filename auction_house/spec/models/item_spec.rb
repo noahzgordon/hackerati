@@ -28,4 +28,14 @@ RSpec.describe Item, :type => :model do
       expect(build(:item)).to respond_to(:auction)
     end
   end
+  
+  describe "#sold?" do
+    it "should respond to the sold? method" do
+      expect(build(:item)).to respond_to(:sold?)
+    end
+    
+    it "should return true for an item with an owner" do
+      expect(build(:item, owner: build(:participant)).sold?).to be(true)
+    end
+  end
 end
