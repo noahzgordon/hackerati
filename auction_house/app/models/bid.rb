@@ -3,6 +3,7 @@ class Bid < ActiveRecord::Base
   
   validates :auction, presence: true
   validates :amount, presence: true, numericality: { greater_than: 0 }
+  belongs_to :bidder, class_name: "User"
   
   validate :new_bid_not_lower_than_prev_bid
   

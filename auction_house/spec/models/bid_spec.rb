@@ -14,6 +14,14 @@ RSpec.describe Bid, :type => :model do
       expect(build :bid, amount: 0).not_to be_valid
     end
     
+    it "should reject a bid without a bidder" do
+      expect(build :bid, bidder: nil).not_to be_valid
+    end
+    
+    it "should reject a bid made by an auctioneer" do
+      expect(build :bid, bidder: build(:auctioneer)).not_to be_valid
+    end
+    
     it "should allow a bid with complete attributes" do
       expect(build(:bid)).to be_valid
     end

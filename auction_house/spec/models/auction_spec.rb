@@ -59,5 +59,9 @@ RSpec.describe Auction, :type => :model do
     it "should successfully retreive the high bid" do
       expect(auction.high_bid.amount).to be(110)
     end
+    
+    it "should update its item with the bid owner's id" do
+      expect(auction.item.owner).not_to be_nil
+    end
   end
 end
