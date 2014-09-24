@@ -40,13 +40,12 @@ RSpec.describe Item, :type => :model do
   end
   
   describe "#query" do
-    let(:item) { create(:item) }
-    
     it "should respond to the query method" do
-      expect(item).to respond_to(:query)
+      expect(Item).to respond_to(:query)
     end
     
     describe "for an item with a completed auction" do
+      let(:item) { create(:item) }
       let(:auction) { create(:auction, item: item) }
       let(:winner) { create(:participant) }
       before do
@@ -59,7 +58,7 @@ RSpec.describe Item, :type => :model do
       end
       
       it "should return a JSON object with the item's information" do
-        expect(item.query).to eq({
+        expect(Item.query(item.name)).to eq({
           auction_status: "success",
           sold: true,
           selling_price: 110,
@@ -69,8 +68,10 @@ RSpec.describe Item, :type => :model do
     end
     
     describe "for a brand new item" do
+      let(:item) { create(:item) }
+    
       it "should return a JSON object with the item's information" do
-        expect(item.query).to eq({
+        expect(Item.query(item.name)).to eq({
           auction_status: nil,
           sold: false,
           selling_price: nil,
