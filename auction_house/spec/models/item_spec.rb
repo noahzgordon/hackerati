@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Item, :type => :model do
-  context "without valid attributes" do
+  describe "validations" do
     it "should require a name" do
       expect(Item.new(price: 200)).not_to be_valid
     end

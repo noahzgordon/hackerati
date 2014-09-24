@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name, null: false, unique: true
       t.integer :price, null: false
-      t.references :owner_id
+      t.references :owner
       
       t.timestamps
     end
