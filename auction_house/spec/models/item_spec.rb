@@ -38,4 +38,31 @@ RSpec.describe Item, :type => :model do
       expect(build(:item, owner: build(:participant)).sold?).to be(true)
     end
   end
+  
+  describe "#query" do
+    let(:item) { create(:item) }
+    let(:auction) { create(:auction, item: item) }
+    let(:winner) { create(:participant) }
+    before do
+      auction.bids.create([
+        { amount: 50, bidder: create(:participant) },
+        { amount: 60, bidder: create(:participant) },
+        { amount: 110, bidder: winner }
+      ])  
+      auction.call
+    end
+    
+    it "should respond to the query method" do
+      expect(item).to respond_to(:query)
+    end
+    
+    it "should return a JSON object with the item's information" do
+      expect(item.query).to eq({
+        auction_status: "success",
+        sold: true,
+        selling_price: 110,
+        sold_to: winner.username
+      }.to_json)
+    end
+  end
 end
