@@ -22,4 +22,10 @@ RSpec.describe Item, :type => :model do
       expect(build(:item)).to be_valid
     end
   end
+  
+  describe "associations" do
+    it "responds to a call for its auction" do
+      expect(build(:item)).to respond_to(:auction)
+    end
+  end
 end
