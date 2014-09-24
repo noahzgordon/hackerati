@@ -22,7 +22,7 @@ RSpec.describe Auction, :type => :model do
   end
   
   it "should respond to the high_bid method" do
-    expect(build(:auction)).to response_to(:high_bid)
+    expect(build(:auction)).to respond_to(:high_bid)
   end
   
   context "after being called without a high bid" do
@@ -57,7 +57,7 @@ RSpec.describe Auction, :type => :model do
     end
     
     it "should successfully retreive the high bid" do
-      expect(auction.high_bid).to be(110)
+      expect(auction.high_bid.amount).to be(110)
     end
   end
 end
