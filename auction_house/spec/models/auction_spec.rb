@@ -29,9 +29,9 @@ RSpec.describe Auction, :type => :model do
     let(:auction) { create(:auction) }
     before do
       auction.bids.create([
-        { amount: 50 },
-        { amount: 60 },
-        { amount: 70 }
+        { amount: 50, bidder: build(:participant) },
+        { amount: 60, bidder: build(:participant) },
+        { amount: 70, bidder: build(:participant) }
       ])  
       auction.call
     end
@@ -45,9 +45,9 @@ RSpec.describe Auction, :type => :model do
     let(:auction) { create(:auction) }
     before do
       auction.bids.create([
-        { amount: 50 },
-        { amount: 60 },
-        { amount: 110 }
+        { amount: 50, bidder: build(:participant) },
+        { amount: 60, bidder: build(:participant) },
+        { amount: 110, bidder: build(:participant) }
       ])  
       auction.call
     end

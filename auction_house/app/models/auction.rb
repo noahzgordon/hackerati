@@ -16,6 +16,7 @@ class Auction < ActiveRecord::Base
   def call
     if self.high_bid.amount > self.item.price
       self.success!
+      self.item.owner = self.high_bid.bidder
     else
       self.failure!
     end

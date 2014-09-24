@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  enum type: [:participant, :auctioneer]
+  enum user_type: [:participant, :auctioneer]
   
   has_many :bids, inverse_of: :bidder
+  has_many :bought_items, class_name: "Item", inverse_of: :owner
   
-  validates :name, :type, presence: true
+  validates :username, :user_type, presence: true
 end

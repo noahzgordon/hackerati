@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140924173940) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.integer  "type"
+    t.integer  "user_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
