@@ -13,9 +13,17 @@ FactoryGirl.define do
   factory :bid do
     auction FactoryGirl.build(:auction)
     amount Random.rand(99)
+  end
+  
+  factory :user do
+    username Faker::Internet.user_name
     
-    factory :high_bid do
-      amount 105
+    factory :auctioneer do
+      type "auctioneer"
+    end
+    
+    factory :participant do
+      type "participant"
     end
   end
 end
