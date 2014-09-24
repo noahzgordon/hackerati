@@ -8,4 +8,19 @@ class Item < ActiveRecord::Base
   def sold?
     self.owner ? true : false
   end
+  
+  def selling_price
+    return nil if !auction
+    return nil if !auction.success?
+    auction.high_bid.amount
+  end
+  
+  def query
+    {
+      auction_status: auction ? auction.status : nil,
+      sold: sold?,
+      selling_price: selling_price,
+      sold_to: owner
+    }.to_json
+  end
 end
