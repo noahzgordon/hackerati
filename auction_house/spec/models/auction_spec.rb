@@ -16,4 +16,48 @@ RSpec.describe Auction, :type => :model do
       expect(build(:auction)).to respond_to(:bids)
     end
   end
+  
+  it "should respond to the call method" do
+    expect(build(:auction)).to respond_to(:call)
+  end
+  
+  it "should respond to the high_bid method" do
+    expect(build(:auction)).to response_to(:high_bid)
+  end
+  
+  context "after being called without a high bid" do
+    let(:auction) { create(:auction) }
+    before do
+      auction.bids.create([
+        { amount: 50 },
+        { amount: 60 },
+        { amount: 70 }
+      ])  
+      auction.call
+    end
+    
+    it "should automatically update as a failed auction" do
+      expect(auction.status).to eq("failure")
+    end
+  end
+  
+  context "after being called with a high bid" do
+    let(:auction) { create(:auction) }
+    before do
+      auction.bids.create([
+        { amount: 50 },
+        { amount: 60 },
+        { amount: 110 }
+      ])  
+      auction.call
+    end
+    
+    it "should automatically update as a successful auction" do
+      expect(auction.status).to eq("success")
+    end
+    
+    it "should successfully retreive the high bid" do
+      expect(auction.high_bid).to be(110)
+    end
+  end
 end
